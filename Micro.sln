@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Common.Abstractions",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Examples.Web", "examples\Micro.Examples.Web\Micro.Examples.Web.csproj", "{B114A82F-4526-4742-BA21-41590B65819C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Domain", "src\Micro.Domain\Micro.Domain.csproj", "{89F4C8B8-6F20-4742-9AB2-F4F41A94AEAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Domain.Abstractions", "src\Micro.Domain.Abstractions\Micro.Domain.Abstractions.csproj", "{F72BE27D-9A66-4795-BBA1-14494B8BD101}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,8 @@ Global
 		{C640E31F-BD53-4913-B539-22A04B28B0C9} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{6A66EF61-B4F1-4D5B-B233-4156DB557F94} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{B114A82F-4526-4742-BA21-41590B65819C} = {26CCDFC1-8335-4936-990A-CF7D2F076031}
+		{89F4C8B8-6F20-4742-9AB2-F4F41A94AEAF} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
+		{F72BE27D-9A66-4795-BBA1-14494B8BD101} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5CFBD38C-CC75-4AD7-BBBE-72ED549F3DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -47,5 +53,13 @@ Global
 		{B114A82F-4526-4742-BA21-41590B65819C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B114A82F-4526-4742-BA21-41590B65819C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B114A82F-4526-4742-BA21-41590B65819C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F4C8B8-6F20-4742-9AB2-F4F41A94AEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F4C8B8-6F20-4742-9AB2-F4F41A94AEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F4C8B8-6F20-4742-9AB2-F4F41A94AEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F4C8B8-6F20-4742-9AB2-F4F41A94AEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F72BE27D-9A66-4795-BBA1-14494B8BD101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F72BE27D-9A66-4795-BBA1-14494B8BD101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F72BE27D-9A66-4795-BBA1-14494B8BD101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F72BE27D-9A66-4795-BBA1-14494B8BD101}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

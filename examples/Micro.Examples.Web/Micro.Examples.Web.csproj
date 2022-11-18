@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Micro.CQRS\Micro.CQRS.csproj" />
+      <ProjectReference Include="..\..\src\Micro.Domain\Micro.Domain.csproj" />
     </ItemGroup>
 
 </Project>
