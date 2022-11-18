@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Common", "src\Micro.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Common.Abstractions", "src\Micro.Common.Abstractions\Micro.Common.Abstractions.csproj", "{6A66EF61-B4F1-4D5B-B233-4156DB557F94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Examples.Web", "examples\Micro.Examples.Web\Micro.Examples.Web.csproj", "{B114A82F-4526-4742-BA21-41590B65819C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,7 @@ Global
 		{E4C8272B-DB74-4B05-A540-E85133E9628C} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{C640E31F-BD53-4913-B539-22A04B28B0C9} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{6A66EF61-B4F1-4D5B-B233-4156DB557F94} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
+		{B114A82F-4526-4742-BA21-41590B65819C} = {26CCDFC1-8335-4936-990A-CF7D2F076031}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5CFBD38C-CC75-4AD7-BBBE-72ED549F3DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -40,5 +43,9 @@ Global
 		{6A66EF61-B4F1-4D5B-B233-4156DB557F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A66EF61-B4F1-4D5B-B233-4156DB557F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A66EF61-B4F1-4D5B-B233-4156DB557F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B114A82F-4526-4742-BA21-41590B65819C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B114A82F-4526-4742-BA21-41590B65819C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B114A82F-4526-4742-BA21-41590B65819C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B114A82F-4526-4742-BA21-41590B65819C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
