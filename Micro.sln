@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Contexts.Abstractions
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Contexts", "src\Micro.Contexts\Micro.Contexts.csproj", "{FBEC3BCD-C947-4F22-A8B8-3F8C2838E2EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Observability.ApplicationInsights", "src\Micro.Observability.ApplicationInsights\Micro.Observability.ApplicationInsights.csproj", "{28FC9119-E71F-4D07-89DC-49231F780F22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,7 @@ Global
 		{F72BE27D-9A66-4795-BBA1-14494B8BD101} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{C9AA44C2-4B65-4BDC-A6DD-98A52EE9CA09} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{FBEC3BCD-C947-4F22-A8B8-3F8C2838E2EB} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
+		{28FC9119-E71F-4D07-89DC-49231F780F22} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5CFBD38C-CC75-4AD7-BBBE-72ED549F3DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -75,5 +78,9 @@ Global
 		{FBEC3BCD-C947-4F22-A8B8-3F8C2838E2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBEC3BCD-C947-4F22-A8B8-3F8C2838E2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBEC3BCD-C947-4F22-A8B8-3F8C2838E2EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28FC9119-E71F-4D07-89DC-49231F780F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28FC9119-E71F-4D07-89DC-49231F780F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28FC9119-E71F-4D07-89DC-49231F780F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28FC9119-E71F-4D07-89DC-49231F780F22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

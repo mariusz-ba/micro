@@ -10,6 +10,7 @@
       <ProjectReference Include="..\..\src\Micro.Contexts\Micro.Contexts.csproj" />
       <ProjectReference Include="..\..\src\Micro.CQRS\Micro.CQRS.csproj" />
       <ProjectReference Include="..\..\src\Micro.Domain\Micro.Domain.csproj" />
+      <ProjectReference Include="..\..\src\Micro.Observability.ApplicationInsights\Micro.Observability.ApplicationInsights.csproj" />
     </ItemGroup>
 
 </Project>
