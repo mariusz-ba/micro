@@ -22,6 +22,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Contexts", "src\Micro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Observability.ApplicationInsights", "src\Micro.Observability.ApplicationInsights\Micro.Observability.ApplicationInsights.csproj", "{28FC9119-E71F-4D07-89DC-49231F780F22}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Simple", "Simple", "{2D84DE02-BC4B-4E0D-A3C0-BEB3CDC61876}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Examples.Simple.Products", "examples\Simple\Micro.Examples.Simple.Products\Micro.Examples.Simple.Products.csproj", "{3FD19CA1-82FB-43C4-88AF-CA772475A35D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Examples.Simple.Notifications", "examples\Simple\Micro.Examples.Simple.Notifications\Micro.Examples.Simple.Notifications.csproj", "{EB415150-668A-48D8-85E9-DAFA811480DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Examples.Simple.Gateway", "examples\Simple\Micro.Examples.Simple.Gateway\Micro.Examples.Simple.Gateway.csproj", "{AD10DEFF-1053-4130-95EF-D28304490D51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +45,10 @@ Global
 		{C9AA44C2-4B65-4BDC-A6DD-98A52EE9CA09} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{FBEC3BCD-C947-4F22-A8B8-3F8C2838E2EB} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{28FC9119-E71F-4D07-89DC-49231F780F22} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
+		{2D84DE02-BC4B-4E0D-A3C0-BEB3CDC61876} = {26CCDFC1-8335-4936-990A-CF7D2F076031}
+		{3FD19CA1-82FB-43C4-88AF-CA772475A35D} = {2D84DE02-BC4B-4E0D-A3C0-BEB3CDC61876}
+		{EB415150-668A-48D8-85E9-DAFA811480DC} = {2D84DE02-BC4B-4E0D-A3C0-BEB3CDC61876}
+		{AD10DEFF-1053-4130-95EF-D28304490D51} = {2D84DE02-BC4B-4E0D-A3C0-BEB3CDC61876}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5CFBD38C-CC75-4AD7-BBBE-72ED549F3DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -75,5 +87,17 @@ Global
 		{28FC9119-E71F-4D07-89DC-49231F780F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28FC9119-E71F-4D07-89DC-49231F780F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28FC9119-E71F-4D07-89DC-49231F780F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD19CA1-82FB-43C4-88AF-CA772475A35D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD19CA1-82FB-43C4-88AF-CA772475A35D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FD19CA1-82FB-43C4-88AF-CA772475A35D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FD19CA1-82FB-43C4-88AF-CA772475A35D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB415150-668A-48D8-85E9-DAFA811480DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB415150-668A-48D8-85E9-DAFA811480DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB415150-668A-48D8-85E9-DAFA811480DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB415150-668A-48D8-85E9-DAFA811480DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD10DEFF-1053-4130-95EF-D28304490D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD10DEFF-1053-4130-95EF-D28304490D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD10DEFF-1053-4130-95EF-D28304490D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD10DEFF-1053-4130-95EF-D28304490D51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
