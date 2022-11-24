@@ -6,25 +6,18 @@ namespace Micro.Observability.ApplicationInsights.TelemetryInitializers;
 
 internal sealed class ExecutionContextTelemetryInitializer : ITelemetryInitializer
 {
-    private readonly IExecutionContextAccessor _executionContextAccessor;
+    private readonly IExecutionContextProvider _executionContextProvider;
 
-    public ExecutionContextTelemetryInitializer(IExecutionContextAccessor executionContextAccessor)
+    public ExecutionContextTelemetryInitializer(IExecutionContextProvider executionContextProvider)
     {
-        _executionContextAccessor = executionContextAccessor;
+        _executionContextProvider = executionContextProvider;
     }
 
     public void Initialize(ITelemetry telemetry)
     {
-        var executionContext = _executionContextAccessor.Context;
-        if (executionContext?.TraceId is not null)
-        {
-            telemetry.Context.Operation.Id = executionContext.TraceId;
-        }
-
-        if (executionContext?.UserId is not null)
-        {
-            telemetry.Context.User.Id = executionContext.UserId;
-            telemetry.Context.User.AuthenticatedUserId = executionContext.UserId;
-        }
+        var executionContext = _executionContextProvider.GetContext();
+        if (executionContext.UserId is null) return;
+        telemetry.Context.User.Id = executionContext.UserId;
+        telemetry.Context.User.AuthenticatedUserId = executionContext.UserId;
     }
 }

@@ -1,9 +1,25 @@
 using Micro.Contexts.Abstractions;
+using System.Diagnostics;
 
 namespace Micro.Contexts;
 
-internal sealed record ExecutionContext : IExecutionContext
+internal sealed class ExecutionContext : IExecutionContext
 {
-    public string TraceId { get; set; } = Guid.NewGuid().ToString("N");
-    public string? UserId { get; set; }
+    public string? ActivityId { get; }
+    public string? TraceId { get; }
+    public string? UserId { get; }
+
+    public ExecutionContext()
+    {
+        ActivityId = Activity.Current?.Id;
+        TraceId = Activity.Current?.TraceId.ToString();
+        UserId = Activity.Current?.GetTagItem("UserId")?.ToString();
+    }
+
+    public ExecutionContext(string? activityId, string? traceId, string? userId)
+    {
+        ActivityId = activityId;
+        TraceId = traceId;
+        UserId = userId;
+    }
 }

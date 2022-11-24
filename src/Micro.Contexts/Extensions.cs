@@ -9,16 +9,12 @@ public static class Extensions
 {
     public static IServiceCollection AddContexts(this IServiceCollection services)
     {
-        services.AddSingleton<IExecutionContextAccessor, ExecutionContextAccessor>();
-        services.AddScoped<ExecutionContextMiddleware>();
-        services.AddScoped<IdentityContextMiddleware>();
+        services.AddSingleton<IExecutionContextProvider, ExecutionContextProvider>();
+        services.AddScoped<ExecutionContextUserMiddleware>();
         
         return services;
     }
 
-    public static IApplicationBuilder UseExecutionContext(this IApplicationBuilder app)
-        => app.UseMiddleware<ExecutionContextMiddleware>();
-
-    public static IApplicationBuilder UseIdentityContext(this IApplicationBuilder app)
-        => app.UseMiddleware<IdentityContextMiddleware>();
+    public static IApplicationBuilder UseContexts(this IApplicationBuilder app)
+        => app.UseMiddleware<ExecutionContextUserMiddleware>();
 }

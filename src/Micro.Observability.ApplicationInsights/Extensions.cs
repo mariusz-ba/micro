@@ -1,3 +1,4 @@
+using Micro.Contexts.Abstractions;
 using Micro.Observability.ApplicationInsights.TelemetryInitializers;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,11 @@ public static class Extensions
     {
         services.AddApplicationInsightsTelemetry();
         services.AddSingleton<ITelemetryInitializer, CloudRoleNameTelemetryInitializer>();
-        services.AddSingleton<ITelemetryInitializer, ExecutionContextTelemetryInitializer>();
+
+        if (services.Any(d => d.ServiceType == typeof(IExecutionContextProvider)))
+        {
+            services.AddSingleton<ITelemetryInitializer, ExecutionContextTelemetryInitializer>();
+        }
 
         return services;
     }
