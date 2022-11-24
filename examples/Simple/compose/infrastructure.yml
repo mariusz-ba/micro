@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: micro-simple-db
+    environment:
+      - MSSQL_SA_PASSWORD=Micro123
+      - ACCEPT_EULA=1
+    ports:
+      - '1433:1433'
+    networks:
+      - micro-simple
+
+networks:
+  micro-simple:
+    name: micro-simple
