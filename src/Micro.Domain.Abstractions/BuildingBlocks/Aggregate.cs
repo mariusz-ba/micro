@@ -2,7 +2,7 @@ using Micro.Domain.Abstractions.Events;
 
 namespace Micro.Domain.Abstractions.BuildingBlocks;
 
-public abstract class Aggregate<TEntityId> : Entity<TEntityId>
+public abstract class Aggregate<TEntityId> : Entity<TEntityId>, IAggregate
 {
     private readonly List<IDomainEvent> _domainEvents = new();
 

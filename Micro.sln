@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Examples.Simple.Notif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Examples.Simple.Gateway", "examples\Simple\Micro.Examples.Simple.Gateway\Micro.Examples.Simple.Gateway.csproj", "{AD10DEFF-1053-4130-95EF-D28304490D51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Persistence.SqlServer", "src\Micro.Persistence.SqlServer\Micro.Persistence.SqlServer.csproj", "{DA73B63D-A596-417A-939C-89D3C7A3F23F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Persistence.Abstractions", "src\Micro.Persistence.Abstractions\Micro.Persistence.Abstractions.csproj", "{625BC0DE-AB27-4208-BDDC-F8316E8F3D8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,8 @@ Global
 		{3FD19CA1-82FB-43C4-88AF-CA772475A35D} = {2D84DE02-BC4B-4E0D-A3C0-BEB3CDC61876}
 		{EB415150-668A-48D8-85E9-DAFA811480DC} = {2D84DE02-BC4B-4E0D-A3C0-BEB3CDC61876}
 		{AD10DEFF-1053-4130-95EF-D28304490D51} = {2D84DE02-BC4B-4E0D-A3C0-BEB3CDC61876}
+		{DA73B63D-A596-417A-939C-89D3C7A3F23F} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
+		{625BC0DE-AB27-4208-BDDC-F8316E8F3D8E} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5CFBD38C-CC75-4AD7-BBBE-72ED549F3DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -99,5 +105,13 @@ Global
 		{AD10DEFF-1053-4130-95EF-D28304490D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD10DEFF-1053-4130-95EF-D28304490D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD10DEFF-1053-4130-95EF-D28304490D51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA73B63D-A596-417A-939C-89D3C7A3F23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA73B63D-A596-417A-939C-89D3C7A3F23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA73B63D-A596-417A-939C-89D3C7A3F23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA73B63D-A596-417A-939C-89D3C7A3F23F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{625BC0DE-AB27-4208-BDDC-F8316E8F3D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{625BC0DE-AB27-4208-BDDC-F8316E8F3D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{625BC0DE-AB27-4208-BDDC-F8316E8F3D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{625BC0DE-AB27-4208-BDDC-F8316E8F3D8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
