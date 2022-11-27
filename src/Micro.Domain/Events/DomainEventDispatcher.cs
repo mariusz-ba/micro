@@ -14,9 +14,8 @@ internal sealed class DomainEventDispatcher : IDomainEventDispatcher
 
     public async Task PublishAsync<TDomainEvent>(TDomainEvent domainEvent) where TDomainEvent : class, IDomainEvent
     {
-        using var scope = _serviceProvider.CreateScope();
         var handlersType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
-        var handlers = scope.ServiceProvider.GetServices(handlersType);
+        var handlers = _serviceProvider.GetServices(handlersType);
 
         foreach (var handler in handlers)
         {
