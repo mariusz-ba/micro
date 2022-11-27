@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\src\Micro.BackgroundJobs.EntityFrameworkCore\Micro.BackgroundJobs.EntityFrameworkCore.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Common\Micro.Common.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Contexts\Micro.Contexts.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.CQRS\Micro.CQRS.csproj" />
