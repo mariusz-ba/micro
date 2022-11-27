@@ -88,18 +88,13 @@ internal sealed class BackgroundJobDataSerializer : IBackgroundJobDataSerializer
             throw new BackgroundJobDataSerializerException("Could not obtain handler method.");
         }
 
-        var arguments = methodExpression.Arguments
-            .Select(argument => ((argument as MemberExpression)?.Expression as ConstantExpression)?.Value)
-            .Where(argument => argument is not null)
-            .SelectMany(argument => argument!.GetType().GetFields().Select(f => f.GetValue(argument)))
+        return methodExpression.Arguments
+            .Select(argument =>
+                Expression
+                    .Lambda(typeof(Func<>).MakeGenericType(argument.Type), argument)
+                    .Compile()
+                    .DynamicInvoke())
             .ToArray();
-
-        if (arguments.Length != methodExpression.Arguments.Count)
-        {
-            throw new BackgroundJobDataSerializerException("Could not obtain handler method arguments.");
-        }
-
-        return arguments;
     }
 
     private static Type? GetTypeByFullName(string fullName) => StringToType
