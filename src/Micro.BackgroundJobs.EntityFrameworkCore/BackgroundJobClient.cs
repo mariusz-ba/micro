@@ -17,7 +17,7 @@ internal sealed class BackgroundJobClient<TContext> : IBackgroundJobClient where
         _serializer = serializer;
     }
     
-    public async Task EnqueueAsync<THandler>(Expression<Func<THandler, Task>> expression, BackgroundJobOptions? options = null)
+    public void Enqueue<THandler>(Expression<Func<THandler, Task>> expression, BackgroundJobOptions? options = null)
     {
         var backgroundJobData = _serializer.Serialize(expression);
         var backgroundJob = new BackgroundJob
@@ -32,6 +32,11 @@ internal sealed class BackgroundJobClient<TContext> : IBackgroundJobClient where
         };
 
         _dbContext.Set<BackgroundJob>().Add(backgroundJob);
+    }
+
+    public async Task EnqueueAsync<THandler>(Expression<Func<THandler, Task>> expression, BackgroundJobOptions? options = null)
+    {
+        Enqueue(expression, options);
         await _dbContext.SaveChangesAsync();
     }
 }
