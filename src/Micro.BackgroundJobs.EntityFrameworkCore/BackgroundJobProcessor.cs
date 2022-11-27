@@ -169,27 +169,24 @@ internal sealed class BackgroundJobProcessor<TContext> : BackgroundService where
     {
         await using var scope = _serviceProvider.CreateAsyncScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
-        await using var transaction = await dbContext.Database.BeginTransactionAsync(IsolationLevel.Serializable, stoppingToken);
-
-        var jobs = await dbContext.Set<BackgroundJob>()
-            .Where(x =>
-                x.Queue == _backgroundJobsOptions.Queue &&
-                x.State == BackgroundJobState.Enqueued &&
-                (x.InvisibleUntil == null || x.InvisibleUntil < DateTime.UtcNow))
-            .OrderBy(x => x.CreatedAt)
-            .Take(_backgroundJobsOptions.FetchJobsBatchSize)
-            .ToListAsync(stoppingToken);
-
-        foreach (var job in jobs)
-        {
-            job.InvisibleUntil = DateTime.UtcNow.Add(_backgroundJobsOptions.FetchJobsTimeout);
-            job.ServerId = Environment.MachineName;
-        }
-
-        await dbContext.SaveChangesAsync(stoppingToken);
-        await transaction.CommitAsync(stoppingToken);
-
-        return jobs;
+        
+        return await dbContext.Set<BackgroundJob>()
+            .FromSqlInterpolated($@"
+WITH [Jobs] AS (
+    SELECT TOP ({_backgroundJobsOptions.FetchJobsBatchSize}) *
+    FROM [Micro].[BackgroundJobs] WITH (ROWLOCK, READPAST)
+    WHERE
+        [Queue] = {_backgroundJobsOptions.Queue} AND
+        [State] = 'Enqueued' AND
+        ([InvisibleUntil] IS NULL OR [InvisibleUntil] < GETUTCDATE())
+    ORDER BY [CreatedAt]
+)
+UPDATE [Jobs]
+SET
+    [ServerId] = {Environment.MachineName},
+    [InvisibleUntil] = {DateTime.UtcNow.Add(_backgroundJobsOptions.FetchJobsTimeout)}
+OUTPUT inserted.*
+").ToListAsync(stoppingToken);
     }
 
     private static void StartJobProcessingActivity(Activity activity, BackgroundJobHandlerDescriptor handlerDescriptor)
