@@ -32,4 +32,28 @@ internal sealed class BackgroundJobActivity
             Activity.Current.Tags.ToDictionary(x => x.Key, x => x.Value),
             Activity.Current.Baggage.ToDictionary(x => x.Key, x => x.Value));
     }
+
+    public void Attach(Activity activity)
+    {
+        if (ActivityId is not null)
+        {
+            var parts = ActivityId.Split('-');
+            if (parts.Length == 4)
+            {
+                activity.SetParentId(
+                    ActivityTraceId.CreateFromString(parts[1]),
+                    ActivitySpanId.CreateFromString(parts[2]));
+            }
+        }
+        
+        foreach (var pair in ActivityTags)
+        {
+            activity.AddTag(pair.Key, pair.Value);
+        }
+        
+        foreach (var pair in ActivityBaggage)
+        {
+            activity.AddBaggage(pair.Key, pair.Value);
+        }
+    }
 }

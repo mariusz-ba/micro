@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Data;
 using System.Diagnostics;
 
 namespace Micro.BackgroundJobs.EntityFrameworkCore;
@@ -84,8 +83,9 @@ internal sealed class BackgroundJobProcessor<TContext> : BackgroundService where
                 }
                 
                 var jobHandlerDescriptor = _serializer.Deserialize(job.Data);
+                jobHandlerDescriptor.Activity?.Attach(activity);
 
-                StartJobProcessingActivity(activity, jobHandlerDescriptor);
+                activity.Start();
                 
                 await ProcessJobAsync(jobHandlerDescriptor);
 
@@ -187,33 +187,5 @@ SET
     [InvisibleUntil] = {DateTime.UtcNow.Add(_backgroundJobsOptions.FetchJobsTimeout)}
 OUTPUT inserted.*
 ").ToListAsync(stoppingToken);
-    }
-
-    private static void StartJobProcessingActivity(Activity activity, BackgroundJobHandlerDescriptor handlerDescriptor)
-    {
-        if (handlerDescriptor.Activity is null)
-        {
-            return;
-        }
-        
-        var parts = handlerDescriptor.Activity.ActivityId?.Split('-') ?? Array.Empty<string>();
-        if (parts.Length == 4)
-        {
-            activity.SetParentId(
-                ActivityTraceId.CreateFromString(parts[1]),
-                ActivitySpanId.CreateFromString(parts[2]));
-        }
-
-        foreach (var pair in handlerDescriptor.Activity.ActivityTags)
-        {
-            activity.AddTag(pair.Key, pair.Value);
-        }
-        
-        foreach (var pair in handlerDescriptor.Activity.ActivityBaggage)
-        {
-            activity.AddBaggage(pair.Key, pair.Value);
-        }
-
-        activity.Start();
     }
 }
