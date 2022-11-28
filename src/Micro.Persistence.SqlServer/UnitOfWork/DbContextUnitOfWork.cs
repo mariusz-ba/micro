@@ -25,6 +25,16 @@ internal sealed class DbContextUnitOfWork<TContext> : IUnitOfWork where TContext
         await _dbContext.SaveChangesAsync();
         await transaction.CommitAsync();
     }
+    
+    public async Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> action)
+    {
+        await using var transaction = await _dbContext.Database.BeginTransactionAsync();
+        var result = await action.Invoke();
+        await PublishDomainEvents();
+        await _dbContext.SaveChangesAsync();
+        await transaction.CommitAsync();
+        return result;
+    }
 
     private async Task PublishDomainEvents()
     {

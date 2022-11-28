@@ -12,10 +12,13 @@ internal sealed class CommandDispatcher : ICommandDispatcher
         _serviceProvider = serviceProvider;
     }
 
-    public async Task SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand
+    public async Task<TResult> SendAsync<TResult>(ICommand<TResult> command)
     {
         using var scope = _serviceProvider.CreateScope();
-        var handler = scope.ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
-        await handler.HandleAsync(command);
+        var handlerType = typeof(ICommandHandler<,>).MakeGenericType(command.GetType(), typeof(TResult));
+        var handler = scope.ServiceProvider.GetRequiredService(handlerType);
+        return await (Task<TResult>)handlerType
+            .GetMethod(nameof(ICommandHandler<ICommand<TResult>, TResult>.HandleAsync))?
+            .Invoke(handler, new object?[] { command })!;
     }
 }

@@ -16,7 +16,7 @@ public static class Extensions
         services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
 
         services.Scan(s => s.FromAssemblies(assemblies)
-            .AddClasses(c => c.AssignableToAny(typeof(ICommandHandler<>), typeof(IQueryHandler<,>))
+            .AddClasses(c => c.AssignableToAny(typeof(ICommandHandler<,>), typeof(IQueryHandler<,>))
                 .WithoutAttribute<DecoratorAttribute>())
             .AsImplementedInterfaces()
             .WithScopedLifetime());
