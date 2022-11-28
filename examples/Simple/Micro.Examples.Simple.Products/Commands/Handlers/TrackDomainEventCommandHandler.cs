@@ -12,10 +12,10 @@ internal sealed class TrackDomainEventCommandHandler : ICommandHandler<TrackDoma
         _logger = logger;
     }
 
-    public Task HandleAsync(TrackDomainEventCommand command)
+    public Task<Unit> HandleAsync(TrackDomainEventCommand command)
     {
         var domainEvent = JsonSerializer.Serialize(command.DomainEvent, command.DomainEvent.GetType());
         _logger.LogInformation("[Tracker]: {DomainEvent}", domainEvent);
-        return Task.CompletedTask;
+        return Task.FromResult(Unit.Value);
     }
 }
