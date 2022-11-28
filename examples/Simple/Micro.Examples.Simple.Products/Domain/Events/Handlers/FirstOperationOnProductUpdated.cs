@@ -16,11 +16,12 @@ internal sealed class FirstOperationOnProductUpdated : IDomainEventHandler<Produ
         _logger = logger;
     }
 
-    public async Task HandleAsync(ProductUpdatedDomainEvent domainEvent)
+    public Task HandleAsync(ProductUpdatedDomainEvent domainEvent)
     {
         _logger.LogInformation("Product updated: Name - {Name}, Price - {Price}",
             domainEvent.Name, domainEvent.Price);
-        await _backgroundJobClient.EnqueueAsync<ICommandDispatcher>(d =>
+        _backgroundJobClient.Enqueue<ICommandDispatcher>(d =>
             d.SendAsync(new TrackDomainEventCommand(domainEvent)));
+        return Task.CompletedTask;
     }
 }

@@ -16,10 +16,11 @@ internal sealed class FirstOperationOnProductCreated : IDomainEventHandler<Produ
         _logger = logger;
     }
 
-    public async Task HandleAsync(ProductCreatedDomainEvent domainEvent)
+    public Task HandleAsync(ProductCreatedDomainEvent domainEvent)
     {
         _logger.LogInformation("Product created: Name - {Name}, Price - {Price}", domainEvent.Name, domainEvent.Price);
-        await _backgroundJobClient.EnqueueAsync<ICommandDispatcher>(d =>
+        _backgroundJobClient.Enqueue<ICommandDispatcher>(d =>
             d.SendAsync(new TrackDomainEventCommand(domainEvent)));
+        return Task.CompletedTask;
     }
 }
