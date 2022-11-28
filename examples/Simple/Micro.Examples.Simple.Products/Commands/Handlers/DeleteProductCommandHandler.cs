@@ -18,7 +18,7 @@ internal sealed class DeleteProductCommandHandler : ICommandHandler<DeleteProduc
         _dbContext = dbContext;
     }
 
-    public Task HandleAsync(DeleteProductCommand command) => _unitOfWork.ExecuteAsync(async () =>
+    public Task<Unit> HandleAsync(DeleteProductCommand command) => _unitOfWork.ExecuteAsync(async () =>
     {
         var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == command.Id);
         if (product is null)
@@ -27,5 +27,6 @@ internal sealed class DeleteProductCommandHandler : ICommandHandler<DeleteProduc
         }
 
         _dbContext.Remove(product);
+        return Unit.Value;
     });
 }
