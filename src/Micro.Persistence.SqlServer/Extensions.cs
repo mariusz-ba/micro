@@ -43,7 +43,7 @@ public static class Extensions
         }
         
         using var scope = app.ApplicationServices.CreateScope();
-        using var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
         dbContext.Database.Migrate();
 
         return app;

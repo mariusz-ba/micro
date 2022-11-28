@@ -1,3 +1,4 @@
+using Micro.BackgroundJobs.SqlServer;
 using Micro.CQRS;
 using Micro.Common.ReverseProxy;
 using Micro.Common;
@@ -18,9 +19,10 @@ builder.Services
     .AddCQRS(assemblies)
     .AddDomainEvents(assemblies)
     .AddPersistence<ProductsDbContext>(builder.Configuration)
+    .AddBackgroundJobs<ProductsDbContext>(builder.Configuration.GetSection("BackgroundJobs"))
     .AddObservability()
     .AddControllers();
-    
+
 var app = builder.Build();
 
 app.MigrateDatabase<ProductsDbContext>();
