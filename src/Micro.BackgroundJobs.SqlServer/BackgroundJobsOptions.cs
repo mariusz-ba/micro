@@ -1,4 +1,4 @@
-namespace Micro.BackgroundJobs.EntityFrameworkCore;
+namespace Micro.BackgroundJobs.SqlServer;
 
 public class BackgroundJobsOptions
 {

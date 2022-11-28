@@ -1,12 +1,12 @@
-using Micro.BackgroundJobs.EntityFrameworkCore.Persistence;
-using Micro.BackgroundJobs.EntityFrameworkCore.Serialization;
+using Micro.BackgroundJobs.SqlServer.Persistence;
+using Micro.BackgroundJobs.SqlServer.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore;
+namespace Micro.BackgroundJobs.SqlServer;
 
 internal sealed class BackgroundJobProcessor<TContext> : BackgroundService where TContext : DbContext
 {

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Newtonsoft.Json;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore.Persistence.Converters;
+namespace Micro.BackgroundJobs.SqlServer.Persistence.Converters;
 
 internal sealed class ClassToJsonConverter<T> : ValueConverter<T?, string?> where T : class
 {

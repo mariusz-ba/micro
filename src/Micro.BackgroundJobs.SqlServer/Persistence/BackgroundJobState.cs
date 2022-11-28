@@ -1,4 +1,4 @@
-namespace Micro.BackgroundJobs.EntityFrameworkCore.Persistence;
+namespace Micro.BackgroundJobs.SqlServer.Persistence;
 
 internal enum BackgroundJobState
 {

@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore.Persistence.Converters;
+namespace Micro.BackgroundJobs.SqlServer.Persistence.Converters;
 
 internal static class ClassToJsonConverterOptions
 {

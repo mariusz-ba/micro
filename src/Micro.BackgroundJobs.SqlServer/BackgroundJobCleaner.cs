@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore;
+namespace Micro.BackgroundJobs.SqlServer;
 
 internal sealed class BackgroundJobCleaner<TContext> : BackgroundService where TContext : DbContext
 {

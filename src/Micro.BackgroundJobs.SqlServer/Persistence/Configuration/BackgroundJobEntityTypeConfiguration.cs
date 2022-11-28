@@ -1,9 +1,9 @@
-using Micro.BackgroundJobs.EntityFrameworkCore.Persistence.Converters;
+using Micro.BackgroundJobs.SqlServer.Persistence.Converters;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.EntityFrameworkCore;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore.Persistence.Configuration;
+namespace Micro.BackgroundJobs.SqlServer.Persistence.Configuration;
 
 internal sealed class BackgroundJobEntityTypeConfiguration : IEntityTypeConfiguration<BackgroundJob>
 {

@@ -1,9 +1,9 @@
-using Micro.BackgroundJobs.EntityFrameworkCore.Persistence;
+using Micro.BackgroundJobs.SqlServer.Persistence;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore.Serialization;
+namespace Micro.BackgroundJobs.SqlServer.Serialization;
 
 internal sealed class BackgroundJobDataSerializer : IBackgroundJobDataSerializer
 {

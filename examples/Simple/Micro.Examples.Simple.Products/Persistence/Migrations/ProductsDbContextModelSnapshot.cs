@@ -22,7 +22,7 @@ namespace Micro.Examples.Simple.Products.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Micro.BackgroundJobs.EntityFrameworkCore.Persistence.BackgroundJob", b =>
+            modelBuilder.Entity("Micro.BackgroundJobs.SqlServer.Persistence.BackgroundJob", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

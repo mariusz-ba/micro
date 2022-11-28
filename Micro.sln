@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Persistence.Abstracti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.BackgroundJobs.Abstractions", "src\Micro.BackgroundJobs.Abstractions\Micro.BackgroundJobs.Abstractions.csproj", "{ABA329B2-0211-4134-84F9-01D6951721E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.BackgroundJobs.EntityFrameworkCore", "src\Micro.BackgroundJobs.EntityFrameworkCore\Micro.BackgroundJobs.EntityFrameworkCore.csproj", "{75FCBEBB-0908-461B-9463-DACB21F93942}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.BackgroundJobs.SqlServer", "src\Micro.BackgroundJobs.SqlServer\Micro.BackgroundJobs.SqlServer.csproj", "{75FCBEBB-0908-461B-9463-DACB21F93942}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

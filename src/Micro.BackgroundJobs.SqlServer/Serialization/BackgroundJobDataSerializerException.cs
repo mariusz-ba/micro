@@ -1,4 +1,4 @@
-namespace Micro.BackgroundJobs.EntityFrameworkCore.Serialization;
+namespace Micro.BackgroundJobs.SqlServer.Serialization;
 
 internal class BackgroundJobDataSerializerException : Exception
 {

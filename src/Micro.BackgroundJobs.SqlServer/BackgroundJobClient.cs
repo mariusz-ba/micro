@@ -1,10 +1,10 @@
 using Micro.BackgroundJobs.Abstractions;
-using Micro.BackgroundJobs.EntityFrameworkCore.Persistence;
-using Micro.BackgroundJobs.EntityFrameworkCore.Serialization;
+using Micro.BackgroundJobs.SqlServer.Persistence;
+using Micro.BackgroundJobs.SqlServer.Serialization;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore;
+namespace Micro.BackgroundJobs.SqlServer;
 
 internal sealed class BackgroundJobClient<TContext> : IBackgroundJobClient where TContext : DbContext
 {

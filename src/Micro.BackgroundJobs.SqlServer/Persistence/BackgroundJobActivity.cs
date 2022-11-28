@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using System.Diagnostics;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore.Persistence;
+namespace Micro.BackgroundJobs.SqlServer.Persistence;
 
 internal sealed class BackgroundJobActivity
 {

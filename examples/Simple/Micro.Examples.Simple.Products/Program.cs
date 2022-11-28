@@ -1,4 +1,4 @@
-using Micro.BackgroundJobs.EntityFrameworkCore;
+using Micro.BackgroundJobs.SqlServer;
 using Micro.CQRS;
 using Micro.Common.ReverseProxy;
 using Micro.Common;

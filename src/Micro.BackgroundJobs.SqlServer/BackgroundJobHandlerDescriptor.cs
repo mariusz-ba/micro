@@ -1,7 +1,7 @@
-using Micro.BackgroundJobs.EntityFrameworkCore.Persistence;
+using Micro.BackgroundJobs.SqlServer.Persistence;
 using System.Reflection;
 
-namespace Micro.BackgroundJobs.EntityFrameworkCore;
+namespace Micro.BackgroundJobs.SqlServer;
 
 internal sealed class BackgroundJobHandlerDescriptor
 {
