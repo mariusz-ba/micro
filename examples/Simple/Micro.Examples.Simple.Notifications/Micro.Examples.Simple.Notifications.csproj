@@ -6,6 +6,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>1591</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\..\..\src\Micro.API\Micro.API.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Common\Micro.Common.csproj" />

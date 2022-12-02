@@ -1,4 +1,5 @@
 using Micro.API.Networking;
+using Micro.API.Swagger;
 using Micro.BackgroundJobs.SqlServer;
 using Micro.CQRS;
 using Micro.Common;
@@ -15,13 +16,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddMicro(builder.Configuration)
-    .AddHeadersForwarding(builder.Configuration)
     .AddContexts()
+    .AddHeadersForwarding(builder.Configuration)
+    .AddSwaggerDocumentation(builder.Configuration)
     .AddCQRS(assemblies)
     .AddDomainEvents(assemblies)
     .AddPersistence<ProductsDbContext>(builder.Configuration)
     .AddBackgroundJobs<ProductsDbContext>(builder.Configuration.GetSection("BackgroundJobs"))
     .AddObservability()
+    .AddRouting(options => options.LowercaseUrls = true)
     .AddControllers();
 
 var app = builder.Build();
@@ -29,6 +32,7 @@ var app = builder.Build();
 app.MigrateDatabase<ProductsDbContext>();
 
 app.UseHeadersForwarding();
+app.UseSwagger();
 app.UseContexts();
 
 app.MapControllers();
