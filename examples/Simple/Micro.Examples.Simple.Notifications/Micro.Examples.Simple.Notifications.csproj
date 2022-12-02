@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\src\Micro.API\Micro.API.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Common\Micro.Common.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Contexts\Micro.Contexts.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Observability.ApplicationInsights\Micro.Observability.ApplicationInsights.csproj" />

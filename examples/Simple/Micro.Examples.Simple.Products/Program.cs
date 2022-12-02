@@ -1,6 +1,6 @@
+using Micro.API.Networking;
 using Micro.BackgroundJobs.SqlServer;
 using Micro.CQRS;
-using Micro.Common.ReverseProxy;
 using Micro.Common;
 using Micro.Contexts;
 using Micro.Domain;
@@ -15,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddMicro(builder.Configuration)
+    .AddHeadersForwarding(builder.Configuration)
     .AddContexts()
     .AddCQRS(assemblies)
     .AddDomainEvents(assemblies)
@@ -27,7 +28,7 @@ var app = builder.Build();
 
 app.MigrateDatabase<ProductsDbContext>();
 
-app.UseReverseProxyHeaders();
+app.UseHeadersForwarding();
 app.UseContexts();
 
 app.MapControllers();
