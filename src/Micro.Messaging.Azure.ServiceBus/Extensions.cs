@@ -1,6 +1,7 @@
 using Azure.Messaging.ServiceBus.Administration;
 using Azure.Messaging.ServiceBus;
 using Micro.Messaging.Abstractions;
+using Micro.Messaging.Azure.ServiceBus.Conventions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,7 +15,8 @@ public static class Extensions
 
         services.AddSingleton(new ServiceBusClient(serviceBusOptions.ConnectionString));
         services.AddSingleton(new ServiceBusAdministrationClient(serviceBusOptions.ConnectionString));
-        
+
+        services.AddSingleton<IMessageBrokerConventions, ServiceBusConventions>();
         services.AddSingleton<IMessagePublisher, ServiceBusMessagePublisher>();
         services.AddSingleton<IMessageSubscriber, ServiceBusMessageSubscriber>();
 
