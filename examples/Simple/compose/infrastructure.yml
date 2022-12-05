@@ -4,11 +4,22 @@ services:
   db:
     image: mcr.microsoft.com/azure-sql-edge
     container_name: micro-simple-db
+    restart: unless-stopped
     environment:
       - MSSQL_SA_PASSWORD=Micro123
       - ACCEPT_EULA=1
     ports:
       - '1433:1433'
+    networks:
+      - micro-simple
+  
+  rabbitmq:
+    image: rabbitmq:3.9.13-management
+    container_name: micro-simple-rabbitmq
+    restart: unless-stopped
+    ports:
+      - '5672:5672'
+      - '15672:15672'
     networks:
       - micro-simple
 
