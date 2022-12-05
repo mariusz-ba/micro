@@ -1,0 +1,47 @@
+version: '3'
+name: micro-simple
+
+services:
+  gateway:
+    image: micro-simple-gateway
+    build:
+      context: ../../..
+      dockerfile: examples/Simple/Micro.Examples.Simple.Gateway/Dockerfile
+    restart: unless-stopped
+    ports:
+      - '5000:80'
+    networks:
+      - micro-simple
+
+  products:
+    image: micro-simple-products
+    build:
+      context: ../../..
+      dockerfile: examples/Simple/Micro.Examples.Simple.Products/Dockerfile
+    restart: unless-stopped
+    environment:
+      - Networking__KnownNetworks__0__Prefix=172.18.0.1
+      - Networking__KnownNetworks__0__PrefixLength=16
+    ports:
+      - '5010:80'
+    networks:
+      - micro-simple
+
+  notifications:
+    image: micro-simple-notifications
+    build:
+      context: ../../..
+      dockerfile: examples/Simple/Micro.Examples.Simple.Notifications/Dockerfile
+    restart: unless-stopped
+    environment:
+      - Networking__KnownNetworks__0__Prefix=172.18.0.1
+      - Networking__KnownNetworks__0__PrefixLength=16
+    ports:
+      - '5020:80'
+    networks:
+      - micro-simple
+
+networks:
+  micro-simple:
+    name: micro-simple
+    external: true

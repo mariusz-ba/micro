@@ -36,16 +36,10 @@ public static class Extensions
 
     public static IApplicationBuilder MigrateDatabase<TContext>(this IApplicationBuilder app) where TContext : DbContext
     {
-        var environment = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
-        if (environment.IsDevelopment() is false)
-        {
-            return app;
-        }
-        
         using var scope = app.ApplicationServices.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
         dbContext.Database.Migrate();
-
+        
         return app;
     }
 }
