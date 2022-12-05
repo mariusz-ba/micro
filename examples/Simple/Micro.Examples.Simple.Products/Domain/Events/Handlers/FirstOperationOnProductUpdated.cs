@@ -1,27 +1,28 @@
 using Micro.BackgroundJobs.Abstractions;
-using Micro.CQRS.Abstractions.Commands;
 using Micro.Domain.Abstractions.Events;
-using Micro.Examples.Simple.Products.Commands;
+using Micro.Examples.Simple.Products.Events;
+using Micro.Messaging.Abstractions;
 
 namespace Micro.Examples.Simple.Products.Domain.Events.Handlers;
 
 internal sealed class FirstOperationOnProductUpdated : IDomainEventHandler<ProductUpdatedDomainEvent>
 {
     private readonly IBackgroundJobClient _backgroundJobClient;
-    private readonly ILogger<FirstOperationOnProductUpdated> _logger;
 
-    public FirstOperationOnProductUpdated(IBackgroundJobClient backgroundJobClient, ILogger<FirstOperationOnProductUpdated> logger)
+    public FirstOperationOnProductUpdated(IBackgroundJobClient backgroundJobClient)
     {
         _backgroundJobClient = backgroundJobClient;
-        _logger = logger;
     }
 
     public Task HandleAsync(ProductUpdatedDomainEvent domainEvent)
     {
-        _logger.LogInformation("Product updated: Name - {Name}, Price - {Price}",
-            domainEvent.Name, domainEvent.Price);
-        _backgroundJobClient.Enqueue<ICommandDispatcher>(d =>
-            d.SendAsync(new TrackDomainEventCommand(domainEvent)));
+        _backgroundJobClient.Enqueue<IMessagePublisher>(p => p.PublishAsync(
+                MessageEnvelope<ProductUpdatedEvent>.Create(new ProductUpdatedEvent(
+                    domainEvent.ProductId,
+                    domainEvent.Name,
+                    domainEvent.Price)), CancellationToken.None),
+            new BackgroundJobOptions { Queue = "MessageOutbox" });
+
         return Task.CompletedTask;
     }
 }
