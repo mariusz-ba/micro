@@ -2,12 +2,9 @@ using Micro.Domain.Abstractions.Events;
 using Micro.Persistence.Abstractions.UnitOfWork;
 using Micro.Persistence.SqlServer.Events;
 using Micro.Persistence.SqlServer.UnitOfWork;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Micro.Persistence.SqlServer;
 
@@ -31,15 +28,8 @@ public static class Extensions
         services.AddScoped<IDomainEventProvider, DbContextDomainEventProvider<TContext>>();
         services.AddScoped<IUnitOfWork, DbContextUnitOfWork<TContext>>();
 
-        return services;
-    }
-
-    public static IApplicationBuilder MigrateDatabase<TContext>(this IApplicationBuilder app) where TContext : DbContext
-    {
-        using var scope = app.ApplicationServices.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
-        dbContext.Database.Migrate();
+        services.AddHostedService<DatabaseInitializer<TContext>>();
         
-        return app;
+        return services;
     }
 }

@@ -33,8 +33,6 @@ builder.Services
 
 var app = builder.Build();
 
-app.MigrateDatabase<ProductsDbContext>();
-
 app.UseHeadersForwarding();
 app.UseSwagger();
 app.UseContexts();
