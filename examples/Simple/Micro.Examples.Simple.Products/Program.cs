@@ -1,3 +1,4 @@
+using Micro.API.Exceptions;
 using Micro.API.Networking;
 using Micro.API.Swagger;
 using Micro.BackgroundJobs.SqlServer;
@@ -23,6 +24,7 @@ builder.Services
     .AddRabbitMq(builder.Configuration)
     .AddHeadersForwarding(builder.Configuration)
     .AddSwaggerDocumentation(builder.Configuration)
+    .AddExceptionsHandling(assemblies)
     .AddCQRS(assemblies)
     .AddDomainEvents(assemblies)
     .AddPersistence<ProductsDbContext>(builder.Configuration)
@@ -33,6 +35,7 @@ builder.Services
 
 var app = builder.Build();
 
+app.UseExceptionsHandling();
 app.UseHeadersForwarding();
 app.UseSwagger();
 app.UseContexts();
