@@ -42,9 +42,9 @@ internal sealed class RabbitMqMessageSubscriber : IMessageSubscriber
             throw new InvalidOperationException($"Queue is not defined on message with type '{typeof(TMessage).Name}'.");
         }
         
-        _channel.ExchangeDeclare(exchange, "fanout", true);
-        _channel.QueueDeclare(queue, true, false, false);
-        _channel.QueueBind(queue, exchange, string.Empty);
+        _channel.ExchangeDeclare(exchange, type: "fanout", durable: true);
+        _channel.QueueDeclare(queue, durable: true, exclusive: false, autoDelete: false);
+        _channel.QueueBind(queue, exchange, routingKey: string.Empty);
 
         var consumer = new EventingBasicConsumer(_channel);
 
@@ -68,10 +68,10 @@ internal sealed class RabbitMqMessageSubscriber : IMessageSubscriber
                 }
             }
             
-            _channel.BasicAck(args.DeliveryTag, false);
+            _channel.BasicAck(args.DeliveryTag, multiple: false);
         };
 
-        _channel.BasicConsume(queue, false, consumer);
+        _channel.BasicConsume(queue, autoAck: false, consumer);
 
         return this;
     }

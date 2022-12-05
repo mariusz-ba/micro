@@ -31,10 +31,9 @@ internal sealed class RabbitMqMessagePublisher : IMessagePublisher
 
         var properties = _channel.CreateBasicProperties();
         properties.MessageId = message.Context.MessageId;
-        properties.CorrelationId = message.Context.TraceId;
-        
-        _channel.ExchangeDeclare(exchange, "fanout", true);
-        _channel.BasicPublish(exchange, string.Empty, true, properties, messageSerialized);
+        properties.CorrelationId = message.Context.TraceId; 
+        _channel.ExchangeDeclare(exchange, type: "fanout", durable: true);
+        _channel.BasicPublish(exchange, routingKey: string.Empty, mandatory: true, properties, messageSerialized);
 
         return Task.CompletedTask;
     }
