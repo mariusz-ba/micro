@@ -18,7 +18,7 @@
       <ProjectReference Include="..\..\..\src\Micro.Contexts\Micro.Contexts.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.CQRS\Micro.CQRS.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Domain\Micro.Domain.csproj" />
-      <ProjectReference Include="..\..\..\src\Micro.Messaging.Azure.ServiceBus\Micro.Messaging.Azure.ServiceBus.csproj" />
+      <ProjectReference Include="..\..\..\src\Micro.Messaging.RabbitMQ\Micro.Messaging.RabbitMQ.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Observability.ApplicationInsights\Micro.Observability.ApplicationInsights.csproj" />
       <ProjectReference Include="..\..\..\src\Micro.Persistence.SqlServer\Micro.Persistence.SqlServer.csproj" />
     </ItemGroup>

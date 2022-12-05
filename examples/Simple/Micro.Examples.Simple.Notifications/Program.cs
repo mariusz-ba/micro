@@ -4,7 +4,7 @@ using Micro.Common;
 using Micro.Contexts;
 using Micro.Examples.Simple.Notifications.Services;
 using Micro.Messaging.Abstractions;
-using Micro.Messaging.Azure.ServiceBus;
+using Micro.Messaging.RabbitMQ;
 using Micro.Observability.ApplicationInsights;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +13,7 @@ builder.Services
     .AddMicro(builder.Configuration)
     .AddContexts()
     .AddMessaging()
-    .AddAzureServiceBus(builder.Configuration)
+    .AddRabbitMq(builder.Configuration)
     .AddEndpointsApiExplorer()
     .AddHeadersForwarding(builder.Configuration)
     .AddSwaggerDocumentation(builder.Configuration)

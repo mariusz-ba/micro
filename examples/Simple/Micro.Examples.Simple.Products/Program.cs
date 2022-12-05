@@ -8,7 +8,7 @@ using Micro.Domain;
 using Micro.Examples.Simple.Products.Persistence;
 using Micro.Examples.Simple.Products;
 using Micro.Messaging.Abstractions;
-using Micro.Messaging.Azure.ServiceBus;
+using Micro.Messaging.RabbitMQ;
 using Micro.Observability.ApplicationInsights;
 using Micro.Persistence.SqlServer;
 
@@ -20,7 +20,7 @@ builder.Services
     .AddMicro(builder.Configuration)
     .AddContexts()
     .AddMessaging()
-    .AddAzureServiceBus(builder.Configuration)
+    .AddRabbitMq(builder.Configuration)
     .AddHeadersForwarding(builder.Configuration)
     .AddSwaggerDocumentation(builder.Configuration)
     .AddCQRS(assemblies)
