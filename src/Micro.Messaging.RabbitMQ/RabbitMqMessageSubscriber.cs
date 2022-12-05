@@ -42,7 +42,7 @@ internal sealed class RabbitMqMessageSubscriber : IMessageSubscriber
             throw new InvalidOperationException($"Queue is not defined on message with type '{typeof(TMessage).Name}'.");
         }
         
-        _channel.ExchangeDeclare(exchange, type: "fanout", durable: true);
+        _channel.ExchangeDeclare(exchange, ExchangeType.Fanout, durable: true);
         _channel.QueueDeclare(queue, durable: true, exclusive: false, autoDelete: false);
         _channel.QueueBind(queue, exchange, routingKey: string.Empty);
 
