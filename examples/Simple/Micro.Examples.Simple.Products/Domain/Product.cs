@@ -5,11 +5,13 @@ namespace Micro.Examples.Simple.Products.Domain;
 
 public class Product : Aggregate<Guid>
 {
+    public override Guid Id { get; }
     public string Name { get; private set; }
     public decimal Price { get; private set; }
 
-    private Product(Guid id, string name, decimal price) : base(id)
+    private Product(Guid id, string name, decimal price)
     {
+        Id = id;
         Name = name;
         Price = price;
     }

@@ -9,7 +9,6 @@ internal sealed class ProductEntityTypeConfiguration : IEntityTypeConfiguration<
     public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.Ignore(x => x.DomainEvents);
         builder.HasIndex(x => x.Name);
         builder.Property(x => x.Name).HasMaxLength(128);
         builder.Property(x => x.Price).HasColumnType("decimal(18,2)");
