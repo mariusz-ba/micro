@@ -1,4 +1,4 @@
-using Micro.Common.Abstractions.Exceptions;
+using Micro.Common.Exceptions;
 using System.Reflection;
 
 namespace Micro.Domain.Abstractions.Exceptions;

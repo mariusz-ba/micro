@@ -1,4 +1,4 @@
-using Micro.Common.Abstractions.Exceptions;
+using Micro.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

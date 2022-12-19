@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Micro.Common\Micro.Common.csproj" />
-      <ProjectReference Include="..\Micro.Messaging.Abstractions\Micro.Messaging.Abstractions.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Micro.Common\Micro.Common.csproj" />
+    <ProjectReference Include="..\Micro.Messaging.Abstractions\Micro.Messaging.Abstractions.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Humanizer.Core" Version="2.14.1" />
-      <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Humanizer.Core" Version="2.14.1" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
+  </ItemGroup>
 
 </Project>

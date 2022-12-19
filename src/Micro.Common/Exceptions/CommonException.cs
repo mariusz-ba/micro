@@ -1,4 +1,4 @@
-namespace Micro.Common.Abstractions.Exceptions;
+namespace Micro.Common.Exceptions;
 
 public abstract class CommonException : Exception
 {
