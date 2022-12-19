@@ -2,7 +2,6 @@ using Azure.Messaging.ServiceBus;
 using Micro.Messaging.Abstractions.Serialization;
 using Micro.Messaging.Abstractions;
 using Micro.Messaging.Azure.ServiceBus.Conventions;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -33,7 +32,8 @@ internal sealed class ServiceBusMessageSubscriber : IMessageSubscriber, IAsyncDi
         _logger = logger;
     }
 
-    public IMessageSubscriber Subscribe<TMessage>(Func<MessageEnvelope<TMessage>, IServiceProvider, CancellationToken, Task> handler)
+    public IMessageSubscriber Subscribe<TMessage>(
+        Func<MessageEnvelope<TMessage>, IServiceProvider, CancellationToken, Task> handler)
         where TMessage : class, IMessage
     {
         var topic = _messageBrokerConventions.GetTopicName(typeof(TMessage));
@@ -43,21 +43,20 @@ internal sealed class ServiceBusMessageSubscriber : IMessageSubscriber, IAsyncDi
             throw new InvalidOperationException($"Subscription is not defined on message with type '{typeof(TMessage).Name}'.");
         }
 
-        var processor = _processors.GetOrAdd(topic, _ => _serviceBusClient.CreateProcessor(topic, subscription));
+        var processor = _processors.GetOrAdd(topic + subscription, _ => _serviceBusClient.CreateProcessor(topic, subscription));
 
         processor.ProcessMessageAsync += async args =>
         {
             var messageDeserialized = _messageSerializer.DeserializeBytes<MessageEnvelope<TMessage>>(args.Message.Body.ToArray());
             if (messageDeserialized is not null)
             {
-                using var activity = new Activity($"Subscribe {topic}/{subscription}");
-                messageDeserialized.Context.Attach(activity);
+                using var activity = new Activity($"Message {topic}/{subscription}");
+                messageDeserialized.Context.Activity.AttachTo(activity);
                 activity.Start();
 
                 try
                 {
-                    await using var scope = _serviceProvider.CreateAsyncScope();
-                    await handler.Invoke(messageDeserialized, scope.ServiceProvider, args.CancellationToken);
+                    await handler.Invoke(messageDeserialized, _serviceProvider, args.CancellationToken);
                 }
                 catch (Exception exception)
                 {
@@ -78,7 +77,7 @@ internal sealed class ServiceBusMessageSubscriber : IMessageSubscriber, IAsyncDi
         {
             processor.StartProcessingAsync();
         }
-        
+
         return this;
     }
 

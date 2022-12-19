@@ -1,7 +1,6 @@
 using Micro.API.Exceptions;
 using Micro.API.Networking;
 using Micro.API.Swagger;
-using Micro.BackgroundJobs.SqlServer;
 using Micro.CQRS;
 using Micro.Common;
 using Micro.Contexts;
@@ -28,7 +27,6 @@ builder.Services
     .AddCQRS(assemblies)
     .AddDomainEvents(assemblies)
     .AddPersistence<ProductsDbContext>(builder.Configuration)
-    .AddBackgroundJobs<ProductsDbContext>(builder.Configuration.GetSection("BackgroundJobs:MessageOutbox"))
     .AddObservability()
     .AddRouting(options => options.LowercaseUrls = true)
     .AddControllers();

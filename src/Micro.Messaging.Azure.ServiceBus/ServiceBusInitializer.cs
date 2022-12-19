@@ -20,10 +20,9 @@ internal sealed class ServiceBusInitializer : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        var messageTypes = AppDomain.CurrentDomain
-            .GetAssemblies()
+        var messageTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a => a.GetTypes())
-            .Where(t => t.IsClass && !t.IsAbstract && typeof(IMessage).IsAssignableFrom(t));
+            .Where(t => t.IsClass && t.IsAbstract is false && t.IsAssignableTo(typeof(IMessage)));
 
         foreach (var messageType in messageTypes)
         {

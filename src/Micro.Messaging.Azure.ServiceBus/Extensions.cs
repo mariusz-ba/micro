@@ -17,7 +17,7 @@ public static class Extensions
         services.AddSingleton(new ServiceBusAdministrationClient(serviceBusOptions.ConnectionString));
 
         services.AddSingleton<IMessageBrokerConventions, ServiceBusConventions>();
-        services.AddSingleton<IMessagePublisher, ServiceBusMessagePublisher>();
+        services.AddSingleton<IMessageBroker, ServiceBusMessageBroker>();
         services.AddSingleton<IMessageSubscriber, ServiceBusMessageSubscriber>();
 
         services.AddHostedService<ServiceBusInitializer>();

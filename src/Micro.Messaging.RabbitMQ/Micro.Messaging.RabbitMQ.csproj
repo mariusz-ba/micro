@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Micro.Common\Micro.Common.csproj" />
     <ProjectReference Include="..\Micro.Messaging.Abstractions\Micro.Messaging.Abstractions.csproj" />
   </ItemGroup>
 

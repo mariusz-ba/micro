@@ -11,8 +11,4 @@
     <ProjectReference Include="..\Micro.CQRS.Abstractions\Micro.CQRS.Abstractions.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Scrutor" Version="4.2.0" />
-  </ItemGroup>
-
 </Project>

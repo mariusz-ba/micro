@@ -6,13 +6,13 @@ using RabbitMQ.Client;
 
 namespace Micro.Messaging.RabbitMQ;
 
-internal sealed class RabbitMqMessagePublisher : IMessagePublisher
+internal sealed class RabbitMqMessageBroker : IMessageBroker
 {
     private readonly IModel _channel;
     private readonly IMessageSerializer _messageSerializer;
     private readonly IMessageBrokerConventions _messageBrokerConventions;
 
-    public RabbitMqMessagePublisher(
+    public RabbitMqMessageBroker(
         IChannelFactory channelFactory,
         IMessageSerializer messageSerializer,
         IMessageBrokerConventions messageBrokerConventions)
@@ -22,16 +22,16 @@ internal sealed class RabbitMqMessagePublisher : IMessagePublisher
         _channel = channelFactory.Create();
     }
     
-    public Task PublishAsync<TMessage>(MessageEnvelope<TMessage> message, CancellationToken cancellationToken = default)
+    public Task PublishAsync<TMessage>(MessageEnvelope<TMessage> envelope, CancellationToken cancellationToken = default)
         where TMessage : class, IMessage
     {
         var exchange = _messageBrokerConventions.GetExchangeName(typeof(TMessage));
         
-        var messageSerialized = _messageSerializer.SerializeBytes(message);
+        var messageSerialized = _messageSerializer.SerializeBytes(envelope);
 
         var properties = _channel.CreateBasicProperties();
-        properties.MessageId = message.Context.MessageId;
-        properties.CorrelationId = message.Context.TraceId; 
+        properties.MessageId = envelope.Context.Metadata.MessageId;
+        properties.CorrelationId = envelope.Context.Activity.TraceId; 
         _channel.ExchangeDeclare(exchange, ExchangeType.Fanout, durable: true);
         _channel.BasicPublish(exchange, routingKey: string.Empty, mandatory: true, properties, messageSerialized);
 

@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 
 namespace Micro.Messaging.Azure.ServiceBus;
 
-internal sealed class ServiceBusMessagePublisher : IMessagePublisher, IAsyncDisposable
+internal sealed class ServiceBusMessageBroker : IMessageBroker, IAsyncDisposable
 {
     private readonly ConcurrentDictionary<string, ServiceBusSender> _senders = new();
 
@@ -14,7 +14,7 @@ internal sealed class ServiceBusMessagePublisher : IMessagePublisher, IAsyncDisp
     private readonly IMessageSerializer _messageSerializer;
     private readonly IMessageBrokerConventions _messageBrokerConventions;
 
-    public ServiceBusMessagePublisher(
+    public ServiceBusMessageBroker(
         ServiceBusClient serviceBusClient,
         IMessageSerializer messageSerializer,
         IMessageBrokerConventions messageBrokerConventions)
@@ -24,18 +24,18 @@ internal sealed class ServiceBusMessagePublisher : IMessagePublisher, IAsyncDisp
         _messageBrokerConventions = messageBrokerConventions;
     }
 
-    public async Task PublishAsync<TMessage>(MessageEnvelope<TMessage> message, CancellationToken cancellationToken = default)
+    public async Task PublishAsync<TMessage>(MessageEnvelope<TMessage> envelope, CancellationToken cancellationToken = default)
         where TMessage : class, IMessage
     {
         var sender = _senders.GetOrAdd(
             _messageBrokerConventions.GetTopicName(typeof(TMessage)),
             topic => _serviceBusClient.CreateSender(topic));
 
-        var messageSerialized = _messageSerializer.SerializeBytes(message);
+        var messageSerialized = _messageSerializer.SerializeBytes(envelope);
         var messageToSend = new ServiceBusMessage(messageSerialized)
         {
-            MessageId = message.Context.MessageId,
-            CorrelationId = message.Context.TraceId
+            MessageId = envelope.Context.Metadata.MessageId,
+            CorrelationId = envelope.Context.Activity.TraceId
         };
 
         await sender.SendMessageAsync(messageToSend, cancellationToken);

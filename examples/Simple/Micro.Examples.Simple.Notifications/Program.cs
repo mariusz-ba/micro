@@ -3,7 +3,6 @@ using Micro.API.Networking;
 using Micro.API.Swagger;
 using Micro.Common;
 using Micro.Contexts;
-using Micro.Examples.Simple.Notifications.Services;
 using Micro.Examples.Simple.Notifications;
 using Micro.Messaging.Abstractions;
 using Micro.Messaging.RabbitMQ;
@@ -23,8 +22,7 @@ builder.Services
     .AddSwaggerDocumentation(builder.Configuration)
     .AddExceptionsHandling(assemblies)
     .AddObservability()
-    .AddRouting(options => options.LowercaseUrls = true)
-    .AddHostedService<MessagingBackgroundService>();
+    .AddRouting(options => options.LowercaseUrls = true);
     
 var app = builder.Build();
 

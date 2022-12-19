@@ -3,12 +3,12 @@ namespace Micro.Messaging.Abstractions;
 [AttributeUsage(AttributeTargets.Class)]
 public class MessageAttribute : Attribute
 {
-    public string Topic { get; }
-    public string? Subscription { get; }
+    public string ProducerService { get; }
+    public bool IsExternalMessage { get; }
 
-    public MessageAttribute(string topic, string? subscription = null)
+    public MessageAttribute(string producerService, bool isExternalMessage = true)
     {
-        Topic = topic;
-        Subscription = subscription;
+        ProducerService = producerService;
+        IsExternalMessage = isExternalMessage;
     }
 }

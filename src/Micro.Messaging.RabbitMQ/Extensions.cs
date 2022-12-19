@@ -20,7 +20,7 @@ public static class Extensions
         services.AddSingleton<IChannelAccessor, ChannelAccessor>();
 
         services.AddSingleton<IMessageBrokerConventions, RabbitMqConventions>();
-        services.AddSingleton<IMessagePublisher, RabbitMqMessagePublisher>();
+        services.AddSingleton<IMessageBroker, RabbitMqMessageBroker>();
         services.AddSingleton<IMessageSubscriber, RabbitMqMessageSubscriber>();
 
         return services;

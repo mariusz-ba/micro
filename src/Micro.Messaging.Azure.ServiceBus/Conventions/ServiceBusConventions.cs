@@ -20,14 +20,14 @@ internal sealed class ServiceBusConventions : IMessageBrokerConventions
         var attribute = messageType.GetCustomAttribute<MessageAttribute>();
         return attribute is null
             ? $"{_appOptions.Value.Name.Kebaberize()}-{messageType.Name.Kebaberize()}"
-            : string.Join('-', attribute.Topic.Split('.').Select(part => part.Kebaberize()));
+            : $"{attribute.ProducerService.Kebaberize()}-{messageType.Name.Kebaberize()}";
     }
 
     public string? GetSubscriptionName(Type messageType)
     {
         var attribute = messageType.GetCustomAttribute<MessageAttribute>();
-        return attribute?.Subscription is null
-            ? null
-            : string.Join('-', attribute.Subscription.Split('.').Select(part => part.Kebaberize()));
+        return attribute?.IsExternalMessage is true
+            ? $"{_appOptions.Value.Name.Kebaberize()}-{messageType.Name.Kebaberize()}"
+            : null;
     }
 }
