@@ -18,7 +18,7 @@ internal sealed class UpdateProductCommandHandler : ICommandHandler<UpdateProduc
         _dbContext = dbContext;
     }
 
-    public Task<Unit> HandleAsync(UpdateProductCommand command) => _unitOfWork.ExecuteAsync(async () =>
+    public async Task<Unit> HandleAsync(UpdateProductCommand command)
     {
         var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == command.Id);
         if (product is null)
@@ -27,6 +27,7 @@ internal sealed class UpdateProductCommandHandler : ICommandHandler<UpdateProduc
         }
 
         product.Update(command.Name, command.Price);
+        await _unitOfWork.SaveChangesAsync();
         return Unit.Value;
-    });
+    }
 }

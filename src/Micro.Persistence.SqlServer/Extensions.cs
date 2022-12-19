@@ -19,10 +19,6 @@ public static class Extensions
         services.Configure<PersistenceOptions>(persistenceSection);
 
         services.AddDbContext<TContext>(options =>
-                options.UseSqlServer(persistenceOptions.ConnectionString),
-            optionsLifetime: ServiceLifetime.Singleton);
-
-        services.AddDbContextFactory<TContext>(options =>
             options.UseSqlServer(persistenceOptions.ConnectionString));
 
         services.AddScoped<IDomainEventProvider, DbContextDomainEventProvider<TContext>>();

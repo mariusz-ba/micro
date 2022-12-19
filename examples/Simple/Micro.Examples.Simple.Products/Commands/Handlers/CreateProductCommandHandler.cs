@@ -16,10 +16,11 @@ internal sealed class CreateProductCommandHandler : ICommandHandler<CreateProduc
         _dbContext = dbContext;
     }
 
-    public Task<Unit> HandleAsync(CreateProductCommand command) => _unitOfWork.ExecuteAsync(() =>
+    public async Task<Unit> HandleAsync(CreateProductCommand command)
     {
         var product = Product.Create(command.Id, command.Name, command.Price);
         _dbContext.Add(product);
-        return Task.FromResult(Unit.Value);
-    });
+        await _unitOfWork.SaveChangesAsync();
+        return Unit.Value;
+    }
 }

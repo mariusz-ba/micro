@@ -2,6 +2,6 @@ namespace Micro.Persistence.Abstractions.UnitOfWork;
 
 public interface IUnitOfWork
 {
-    Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> action);
-    Task ExecuteAsync(Func<Task> action);
+    Task<int> SaveChangesAsync();
+    Task<int> SaveChangesAsync(Func<Task> action);
 }

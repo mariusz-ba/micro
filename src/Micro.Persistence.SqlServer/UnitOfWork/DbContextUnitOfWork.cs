@@ -1,47 +1,94 @@
 using Micro.Domain.Abstractions.Events;
+using Micro.Persistence.Abstractions.Exceptions;
 using Micro.Persistence.Abstractions.UnitOfWork;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Transactions;
 
 namespace Micro.Persistence.SqlServer.UnitOfWork;
 
 internal sealed class DbContextUnitOfWork<TContext> : IUnitOfWork where TContext : DbContext
 {
+    private readonly IServiceProvider _serviceProvider;
     private readonly TContext _dbContext;
-    private readonly IDomainEventProvider _domainEventProvider;
-    private readonly IDomainEventDispatcher _domainEventDispatcher;
 
-    public DbContextUnitOfWork(TContext dbContext, IDomainEventProvider domainEventProvider, IDomainEventDispatcher domainEventDispatcher)
+    public DbContextUnitOfWork(IServiceProvider serviceProvider, TContext dbContext)
     {
+        _serviceProvider = serviceProvider;
         _dbContext = dbContext;
-        _domainEventProvider = domainEventProvider;
-        _domainEventDispatcher = domainEventDispatcher;
     }
 
-    public async Task ExecuteAsync(Func<Task> action)
+    public async Task<int> SaveChangesAsync()
     {
-        await using var transaction = await _dbContext.Database.BeginTransactionAsync();
-        await action.Invoke();
-        await PublishDomainEvents();
-        await _dbContext.SaveChangesAsync();
-        await transaction.CommitAsync();
-    }
-    
-    public async Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> action)
-    {
-        await using var transaction = await _dbContext.Database.BeginTransactionAsync();
-        var result = await action.Invoke();
-        await PublishDomainEvents();
-        await _dbContext.SaveChangesAsync();
-        await transaction.CommitAsync();
+        using var transactionScope = new TransactionScope(
+            TransactionScopeOption.Required,
+            TransactionScopeAsyncFlowOption.Enabled);
+
+        await PublishDomainEventsAsync();
+        var result = await SaveChangesAndHandleExceptionsAsync();
+        transactionScope.Complete();
         return result;
     }
 
-    private async Task PublishDomainEvents()
+    public async Task<int> SaveChangesAsync(Func<Task> action)
     {
-        var domainEvents = _domainEventProvider.GetDomainEvents();
-        foreach (var domainEvent in domainEvents)
+        using var transactionScope = new TransactionScope(
+            TransactionScopeOption.Required,
+            TransactionScopeAsyncFlowOption.Enabled);
+
+        await action.Invoke();
+        await PublishDomainEventsAsync();
+        var result = await SaveChangesAndHandleExceptionsAsync();
+        transactionScope.Complete();
+        return result;
+    }
+
+    private async Task<int> SaveChangesAndHandleExceptionsAsync()
+    {
+        try
         {
-            await _domainEventDispatcher.PublishAsync(domainEvent);
+            return await _dbContext.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException exception)
+        {
+            throw new EntityConcurrentUpdateException(exception);
+        }
+        catch (DbUpdateException exception)
+        {
+            if (exception.InnerException is SqlException { Number: 2601 })
+            {
+                throw new EntityDuplicateException(exception);
+            }
+
+            throw;
+        }
+    }
+
+    private async Task PublishDomainEventsAsync()
+    {
+        var domainEventProvider = _serviceProvider.GetService<IDomainEventProvider>();
+        if (domainEventProvider is null)
+        {
+            return;
+        }
+        
+        var domainEventDispatcher = _serviceProvider.GetService<IDomainEventDispatcher>();
+        if (domainEventDispatcher is null)
+        {
+            return;
+        }
+
+        var domainEvents = domainEventProvider.GetDomainEvents();
+
+        while (domainEvents.Count > 0)
+        {
+            foreach (var domainEvent in domainEvents)
+            {
+                await domainEventDispatcher.PublishAsync(domainEvent);
+            }
+
+            domainEvents = domainEventProvider.GetDomainEvents();
         }
     }
 }

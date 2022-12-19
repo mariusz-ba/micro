@@ -23,7 +23,7 @@ internal sealed class DatabaseInitializer<TContext> : IHostedService where TCont
             return;
         }
         
-        using var scope = _serviceProvider.CreateScope();
+        await using var scope = _serviceProvider.CreateAsyncScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
         await dbContext.Database.MigrateAsync(cancellationToken);
     }

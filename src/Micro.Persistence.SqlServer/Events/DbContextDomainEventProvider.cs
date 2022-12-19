@@ -13,7 +13,7 @@ internal sealed class DbContextDomainEventProvider<TContext> : IDomainEventProvi
         _dbContext = dbContext;
     }
 
-    public IEnumerable<IDomainEvent> GetDomainEvents()
+    public IList<IDomainEvent> GetDomainEvents()
     {
         var domainEvents = new List<IDomainEvent>();
 
