@@ -7,6 +7,8 @@ using Micro.Contexts;
 using Micro.Domain;
 using Micro.Examples.Simple.Products.Persistence;
 using Micro.Examples.Simple.Products;
+using Micro.Hangfire.Messaging.Outbox;
+using Micro.Hangfire;
 using Micro.Messaging.Abstractions;
 using Micro.Messaging.RabbitMQ;
 using Micro.Observability.ApplicationInsights;
@@ -27,6 +29,8 @@ builder.Services
     .AddCQRS(assemblies)
     .AddDomainEvents(assemblies)
     .AddPersistence<ProductsDbContext>(builder.Configuration)
+    .AddHangfire<ProductsDbContext>(builder.Configuration)
+    .AddHangfireMessagingOutbox()
     .AddObservability()
     .AddRouting(options => options.LowercaseUrls = true)
     .AddControllers();

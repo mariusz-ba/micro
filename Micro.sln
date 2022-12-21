@@ -40,6 +40,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Messaging.Azure.Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Messaging.RabbitMQ", "src\Micro.Messaging.RabbitMQ\Micro.Messaging.RabbitMQ.csproj", "{6B15A9D8-07C6-4A9B-BECF-1A436934CE2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Hangfire", "src\Micro.Hangfire\Micro.Hangfire.csproj", "{D3E74787-36B4-4448-982A-63907181AB4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micro.Hangfire.Messaging", "src\Micro.Hangfire.Messaging\Micro.Hangfire.Messaging.csproj", "{1EB38E2B-5361-4978-9A74-3152DDDEE60B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,8 @@ Global
 		{62867D11-FB5E-4BBC-8785-3A134E68AAD0} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{941E0891-D303-46A3-BEFF-E2E7085D45FA} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 		{6B15A9D8-07C6-4A9B-BECF-1A436934CE2B} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
+		{D3E74787-36B4-4448-982A-63907181AB4C} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
+		{1EB38E2B-5361-4978-9A74-3152DDDEE60B} = {E633CACD-8296-4A0E-BBCC-3698CE91A889}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5CFBD38C-CC75-4AD7-BBBE-72ED549F3DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -134,5 +140,13 @@ Global
 		{6B15A9D8-07C6-4A9B-BECF-1A436934CE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B15A9D8-07C6-4A9B-BECF-1A436934CE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B15A9D8-07C6-4A9B-BECF-1A436934CE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E74787-36B4-4448-982A-63907181AB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E74787-36B4-4448-982A-63907181AB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E74787-36B4-4448-982A-63907181AB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E74787-36B4-4448-982A-63907181AB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB38E2B-5361-4978-9A74-3152DDDEE60B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB38E2B-5361-4978-9A74-3152DDDEE60B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB38E2B-5361-4978-9A74-3152DDDEE60B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB38E2B-5361-4978-9A74-3152DDDEE60B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
