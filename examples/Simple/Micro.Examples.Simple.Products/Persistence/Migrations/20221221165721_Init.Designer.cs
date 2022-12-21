@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Micro.Examples.Simple.Products.Persistence.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20221125002944_AddProducts")]
-    partial class AddProducts
+    [Migration("20221221165721_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

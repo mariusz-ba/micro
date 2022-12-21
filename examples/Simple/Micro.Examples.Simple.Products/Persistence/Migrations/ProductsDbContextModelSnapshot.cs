@@ -22,60 +22,6 @@ namespace Micro.Examples.Simple.Products.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Micro.BackgroundJobs.SqlServer.Persistence.BackgroundJob", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ErrorMessage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("InvisibleUntil")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ProcessedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ProcessingDuration")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Queue")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("RetryAttempt")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RetryMaxCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ServerId")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("State", "ProcessedAt");
-
-                    b.HasIndex("State", "Queue", "InvisibleUntil", "CreatedAt");
-
-                    b.ToTable("BackgroundJobs", "Micro");
-                });
-
             modelBuilder.Entity("Micro.Examples.Simple.Products.Domain.Product", b =>
                 {
                     b.Property<Guid>("Id")
