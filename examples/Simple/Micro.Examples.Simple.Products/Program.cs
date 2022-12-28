@@ -6,15 +6,12 @@ using Micro.Common;
 using Micro.Contexts;
 using Micro.Domain;
 using Micro.Examples.Simple.Products.Persistence;
-using Micro.Examples.Simple.Products;
 using Micro.Hangfire.Messaging.Outbox;
 using Micro.Hangfire;
 using Micro.Messaging.Abstractions;
 using Micro.Messaging.RabbitMQ;
 using Micro.Observability.ApplicationInsights;
 using Micro.Persistence.SqlServer;
-
-var assemblies = AssembliesProvider.GetAssemblies();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,9 +22,9 @@ builder.Services
     .AddRabbitMq(builder.Configuration)
     .AddHeadersForwarding(builder.Configuration)
     .AddSwaggerDocumentation(builder.Configuration)
-    .AddExceptionsHandling(assemblies)
-    .AddCQRS(assemblies)
-    .AddDomainEvents(assemblies)
+    .AddExceptionsHandling()
+    .AddCQRS()
+    .AddDomainEvents()
     .AddPersistence<ProductsDbContext>(builder.Configuration)
     .AddHangfire<ProductsDbContext>(builder.Configuration)
     .AddHangfireMessagingOutbox()

@@ -3,12 +3,9 @@ using Micro.API.Networking;
 using Micro.API.Swagger;
 using Micro.Common;
 using Micro.Contexts;
-using Micro.Examples.Simple.Notifications;
 using Micro.Messaging.Abstractions;
 using Micro.Messaging.RabbitMQ;
 using Micro.Observability.ApplicationInsights;
-
-var assemblies = AssembliesProvider.GetAssemblies();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +17,7 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddHeadersForwarding(builder.Configuration)
     .AddSwaggerDocumentation(builder.Configuration)
-    .AddExceptionsHandling(assemblies)
+    .AddExceptionsHandling()
     .AddObservability()
     .AddRouting(options => options.LowercaseUrls = true);
     

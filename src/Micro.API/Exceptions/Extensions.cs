@@ -1,17 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace Micro.API.Exceptions;
 
 public static class Extensions
 {
-    public static IServiceCollection AddExceptionsHandling(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+    public static IServiceCollection AddExceptionsHandling(this IServiceCollection services)
     {
         services.AddScoped<ExceptionsHandlerMiddleware>();
         services.AddSingleton<IExceptionCompositionRoot, ExceptionCompositionRoot>();
         services.AddSingleton<IExceptionToResponseMapper, ExceptionToResponseMapper>();
-        services.Scan(s => s.FromAssemblies(assemblies)
+        services.Scan(s => s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
             .AddClasses(c => c.AssignableTo<IExceptionToResponseMapper>())
             .AsImplementedInterfaces()
             .WithSingletonLifetime());
