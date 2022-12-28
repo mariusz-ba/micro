@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Micro.Common\Micro.Common.csproj" />
+    <ProjectReference Include="..\Micro.Domain.Abstractions\Micro.Domain.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

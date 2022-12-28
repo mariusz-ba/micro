@@ -23,6 +23,7 @@ public static class Extensions
             });
 
             options.ConfigureDocumentationComments();
+            options.SupportNonNullableReferenceTypes();
         });
 
         return services;

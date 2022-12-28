@@ -40,5 +40,5 @@ app.UseSwagger();
 app.UseContexts();
 
 app.MapControllers();
-app.MapGet("/", () => "Micro.Examples.Simple.Products");
+app.MapGet("/", () => "Micro.Examples.Simple.Products").ExcludeFromDescription();
 app.Run();

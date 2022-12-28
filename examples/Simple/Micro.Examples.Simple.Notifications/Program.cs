@@ -28,5 +28,5 @@ app.UseHeadersForwarding();
 app.UseSwagger();
 app.UseContexts();
 
-app.MapGet("/", () => "Micro.Examples.Simple.Notifications");
+app.MapGet("/", () => "Micro.Examples.Simple.Notifications").ExcludeFromDescription();
 app.Run();
